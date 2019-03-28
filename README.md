@@ -1,5 +1,7 @@
 # vuejs_manager_card
 
+## directory structure and configuration generated from vue-cli
+
 ## Project setup
 ```
 npm install
