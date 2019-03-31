@@ -3,35 +3,72 @@
     <v-layout
       text-xs-center
     >
-        <v-card>
+        <v-card 
+            width="100%" 
+            @mouseover="handlerHover"
+            @mouseout="handlerHover">
             <v-img
-                src="https://cdn.vuetifyjs.com/images/cards/desert.jpg"
+                :src="card.url"
                 aspect-ratio="2.75"
-                ></v-img>
-
+                class="align-end"
+                >
+                <v-container
+                    fluid
+                    pa-2
+                    align-end
+                    justify-start
+                  >
+                    <div class="headline white--text text-xs-left">{{ card.title }}</div>
+                  </v-container>
+            </v-img>
             <v-card-title primary-title>
                 <div>
-                    <h3 class="headline mb-0">Kangaroo Valley Safari</h3>
-                    <div> {{ card_text }} </div>
+                    <div> {{ card.description }} </div>
                 </div>
             </v-card-title>
 
-            <v-card-actions>
-                <v-btn flat color="orange">Share</v-btn>
-                <v-btn flat color="orange">Explore</v-btn>
+            <v-card-actions class="justify-end">
+                <div v-show="hover">
+                    <v-btn 
+                        v-for="(action, index) of actions" 
+                        :key="index" 
+                        flat
+                        @click="action.onAction" 
+                        :color="action.labelColor">{{action.label}}</v-btn>
+                </div>
             </v-card-actions>
         </v-card>
     </v-layout>
   </v-container>
 </template>
 
-<script>
-export default {
-    data: () => ({
-    })
-};
+<script lang="ts">
+import { CardInterface } from '@/store/modules/cards';
+import { Component, Vue, Prop } from 'vue-property-decorator';
+
+export interface CardActionInterface {
+    label: string;
+    labelColor: string;
+    onAction: (id: string) => void;
+}
+
+@Component({
+})
+export default class Card extends Vue {
+    @Prop({required: true})
+    private readonly card!: CardInterface;
+    @Prop({default: []})
+    private readonly actions!: CardActionInterface[];
+    private hover: boolean = false;
+
+    private handlerHover (): void {
+        this.hover = !this.hover;
+    }
+}
 </script>
 
 <style>
-
+.min-height {
+    min-height: 52px
+}
 </style>
