@@ -37,8 +37,8 @@
 
 <script lang="ts">
 import { clone } from 'lodash';
-import { CardRawInterface } from '@/store/modules/cards';
-import { Component, Vue, Prop } from 'vue-property-decorator';
+import { CardRawInterface, CardInterface } from '@/store/modules/cards';
+import { Component, Vue, Prop, Watch } from 'vue-property-decorator';
 
 @Component({})
 export default class Card extends Vue {
@@ -66,6 +66,11 @@ export default class Card extends Vue {
 
         await this.onSubmit(card);
 
+        this.cardEdit = this.resetEditCard();
+    }
+
+    @Watch('card')
+    private onCardChanged (value: CardRawInterface, oldValue: CardRawInterface) {
         this.cardEdit = this.resetEditCard();
     }
 }

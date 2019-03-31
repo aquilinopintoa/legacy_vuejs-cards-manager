@@ -33,7 +33,7 @@
                         v-for="(action, index) of actions" 
                         :key="index" 
                         flat
-                        @click="action.onAction" 
+                        @click="action.onAction(card)" 
                         :color="action.labelColor">{{action.label}}</v-btn>
                 </div>
             </v-card-actions>
@@ -49,7 +49,7 @@ import { Component, Vue, Prop } from 'vue-property-decorator';
 export interface CardActionInterface {
     label: string;
     labelColor: string;
-    onAction: (id: string) => void;
+    onAction: (card: CardInterface) => void;
 }
 
 @Component({

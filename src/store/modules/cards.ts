@@ -57,8 +57,11 @@ export default {
 
             await context.commit('set', card);
         },
+        async update (context: any, card: CardInterface) {
+            await context.commit('set', card);
+        },
         async remove (context: any, id: string) {
-            const previous = context.getters.get;
+            const previous = context.getters.get();
             const removedTarget = previous.filter((card: CardInterface) => card.id !== id);
 
             await context.commit('reset');
