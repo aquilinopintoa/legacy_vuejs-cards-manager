@@ -1,7 +1,17 @@
 <template>
   <div class="home">
-    <v-layout row wrap>
-        <v-flex xs4 v-for="(card, index) of cards" :key="index">
+    <v-toolbar app class="mt-5" card prominent>
+        <v-layout row justify-center>
+            <v-flex xs8>
+                <v-select>
+
+                </v-select>
+            </v-flex>
+        </v-layout>
+    </v-toolbar>
+    
+    <v-layout row wrap class="mt-5">
+        <v-flex xs12 md6 lg4 v-for="(card, index) of cards" :key="index">
             <Card
                 :card="card"
                 :actions="cardActions"/>
