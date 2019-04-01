@@ -1,10 +1,20 @@
 <template>
   <div class="home">
-    <v-layout row wrap>
-        <v-flex xs4 v-for="(card, index) of cards" :key="index">
+    <v-toolbar app class="mt-5" card prominent>
+        <v-layout row justify-center>
+            <v-flex xs8>
+                <v-select>
+
+                </v-select>
+            </v-flex>
+        </v-layout>
+    </v-toolbar>
+    
+    <v-layout row wrap class="mt-5">
+        <v-flex xs12 md6 lg4 v-for="(card, index) of cards" :key="index">
             <Card
                 :card="card"
-                :actions="cardActions(card.id)"/>
+                :actions="cardActions"/>
         </v-flex>
     </v-layout>
     <v-dialog
@@ -32,6 +42,7 @@
 </template>
 
 <script lang="ts">
+import { clone } from 'lodash';
 import { Component, Vue } from 'vue-property-decorator';
 import {
     CardRawInterface,
@@ -71,26 +82,23 @@ export default class Home extends Vue {
         return this.modalMode === MODAL_MODE.create;
     }
 
-    get cardActions (): (id: string) => CardActionInterface[] {
-        return (id: string) => {
-            const actions = [
-                {
-                    label: 'Edit',
-                    labelColor: 'warning',
-                    onAction: () => {
-                        alert('work');
-                    }
-                },
-                {
-                    label: 'Remove',
-                    labelColor: 'error',
-                    onAction: () => {
-                        alert('works');
-                    }
+    get cardActions (): CardActionInterface[] {
+        return [
+            {
+                label: 'Edit',
+                labelColor: 'warning',
+                onAction: (card: CardInterface) => {
+                    this.openUpdateModal(card);
                 }
-            ];
-            return actions;
-        };
+            },
+            {
+                label: 'Remove',
+                labelColor: 'error',
+                onAction: (card: CardInterface) => {
+                    this.removeCard(card.id);
+                }
+            }
+        ];
     }
 
     private openCreateModal () {
@@ -98,15 +106,25 @@ export default class Home extends Vue {
         this.modalMode = MODAL_MODE.create;
     }
 
+    private openUpdateModal (card: CardInterface) {
+        this.openModal = true;
+        this.modalMode = MODAL_MODE.update;
+        this.selectedCard = clone(card);
+    }
+
+
     private async handlerSubmit (data: CardRawInterface) {
         switch (this.modalMode) {
             case MODAL_MODE.create:
                 await this.createCard(data);
                 break;
             case MODAL_MODE.update:
-                // valor previo
-                // crear nuevo objeto con data updated
-                // this.updateCard(data)
+                if (!this.selectedCard) {
+                    break;
+                }
+
+                const id = this.selectedCard.id;
+                await this.updateCard(data);
                 break;
             default:
                 alert('Error modal mode undefined!');
@@ -118,18 +136,24 @@ export default class Home extends Vue {
     private handlerCancel () {
         this.modalMode = null;
         this.openModal = false;
+        this.selectedCard = null;
     }
 
     private createCard (cardRaw: CardRawInterface) {
-        this.$store.dispatch('cards/create', cardRaw);
+        return this.$store.dispatch('cards/create', cardRaw);
     }
 
-    private updateCard (card: CardInterface) {
-        this.$store.dispatch('cards/update', card);
+    private updateCard (card: CardRawInterface) {
+        const updatedCard = {
+            ...this.selectedCard,
+            ...card
+        };
+
+        return this.$store.dispatch('cards/update', updatedCard);
     }
 
     private removeCard (id: string) {
-        this.$store.dispatch('cards/remove', id);
+        return this.$store.dispatch('cards/remove', id);
     }
 }
 </script>

@@ -13,7 +13,6 @@
         <span class="mr-2">Go to author</span>
       </v-btn>
     </v-toolbar>
-
     <v-content>
       <router-view/>
     </v-content>
