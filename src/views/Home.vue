@@ -2,11 +2,8 @@
   <div class="home">
     <v-toolbar app class="mt-5" card prominent>
         <v-layout row justify-center>
-            <v-flex xs8>
-                <v-select>
-
-                </v-select>
-            </v-flex>
+            <CardsToolBar
+                @order-change="handlerOrderChange"/>
         </v-layout>
     </v-toolbar>
     
@@ -19,8 +16,7 @@
     </v-layout>
     <v-dialog
       v-model="openModal"
-      width="500"
-    >
+      width="500">
         <CardForm
             :card="selectedCard"
             :onSubmit="handlerSubmit"
@@ -42,13 +38,14 @@
 </template>
 
 <script lang="ts">
-import { clone } from 'lodash';
+import { clone, orderBy } from 'lodash';
 import { Component, Vue } from 'vue-property-decorator';
 import {
     CardRawInterface,
     CardInterface
 } from '@/store/modules/cards';
 import Card, { CardActionInterface } from '@/components/Card.vue';
+import CardsToolBar, { OrderInterface } from '@/components/CardsToolBar.vue';
 import CardForm from '@/components/CardForm.vue';
 
 const MODAL_MODE = {
@@ -59,7 +56,8 @@ const MODAL_MODE = {
 @Component({
     components: {
         Card,
-        CardForm
+        CardForm,
+        CardsToolBar
     },
 })
 
@@ -68,9 +66,14 @@ export default class Home extends Vue {
     private modalMode: string | null = null;
     private openModal: boolean = false;
     private selectedCard: CardInterface | null = null;
+    private order: OrderInterface | null = null;
+    private filter: null = null;
 
     get cards (): CardInterface[] {
-        const cards = this.$store.getters['cards/get']();
+        let cards = this.$store.getters['cards/get']();
+        if (this.order) {
+            cards = orderBy(cards, [this.order.orderField], [this.order.order]);
+        }
         return cards;
     }
 
@@ -112,7 +115,7 @@ export default class Home extends Vue {
         this.selectedCard = clone(card);
     }
 
-
+    // MODAL MANAGER METHODS
     private async handlerSubmit (data: CardRawInterface) {
         switch (this.modalMode) {
             case MODAL_MODE.create:
@@ -139,6 +142,7 @@ export default class Home extends Vue {
         this.selectedCard = null;
     }
 
+    // CARD MANAGER METHODS
     private createCard (cardRaw: CardRawInterface) {
         return this.$store.dispatch('cards/create', cardRaw);
     }
@@ -154,6 +158,12 @@ export default class Home extends Vue {
 
     private removeCard (id: string) {
         return this.$store.dispatch('cards/remove', id);
+    }
+
+    //  METHODS TO CARD MANAGER TOOL BAR EVENTS
+    private handlerOrderChange (newValue: OrderInterface) {
+        this.order = newValue;
+        console.log(this.order);
     }
 }
 </script>
