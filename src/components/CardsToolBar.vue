@@ -1,5 +1,5 @@
 <template>
-    <v-container fluid>
+    <v-container fluid class="pa-0">
         <v-layout justify-center>
             <v-flex xs5 lg6>
                 <v-layout>
@@ -61,7 +61,7 @@ export default class Card extends Vue {
             value: ''
         },
         {
-            label: 'Created at',
+            label: 'Created',
             value: 'created_at'
         }, {
             label: 'Title',
