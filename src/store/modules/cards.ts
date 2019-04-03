@@ -19,6 +19,16 @@ export interface CardInterface {
 
 }
 
+export const FactoryCard = (raw: CardRawInterface): CardInterface => {
+    const createdAt = moment().format();
+    return {
+        id: `${raw.title}${createdAt}`,
+        created_at: createdAt,
+        ...raw,
+        url: raw.url || DEFAULT_URL
+    };
+};
+
 export default {
     namespaced: true,
     state: {
@@ -56,13 +66,7 @@ export default {
 
     actions: {
         async create (context: any, cardRaw: CardRawInterface) {
-            const createdAt = moment().format();
-            const card = {
-                id: `${cardRaw.title}${createdAt}`,
-                created_at: createdAt,
-                ...cardRaw,
-                url: cardRaw.url || DEFAULT_URL
-            };
+            const card = FactoryCard(cardRaw);
 
             await context.commit('set', card);
         },

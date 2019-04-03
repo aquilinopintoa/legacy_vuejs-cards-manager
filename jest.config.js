@@ -15,6 +15,15 @@ module.exports = {
   transformIgnorePatterns: [
     '/node_modules/'
   ],
+  collectCoverage: true,
+  coverageReporters: [
+    'json',
+    'html'
+  ],
+  collectCoverageFrom: [
+    'src/**/*.ts',
+    'src/**/*.vue'
+  ],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1'
   },
