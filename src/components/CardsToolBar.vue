@@ -4,6 +4,7 @@
             <v-flex xs5 lg6>
                 <v-layout>
                     <v-text-field
+                        dark
                         placeholder="Filter"
                         append-icon="filter_list"
                         v-model="filterValue"
@@ -12,21 +13,21 @@
                 </v-layout>
             </v-flex>
             <v-flex xs6 md4 lg3 class="ml-2">
-                <v-layout>
+                <v-layout align-center>
                     <v-select
+                        dark
                         :items="orderFieldOptions"
                         item-text="label"
                         item-value="value"
                         v-model="orderFieldSelected"
                         @change="handlerOrderChange">
-                        
                     </v-select>
                     <v-btn 
                         v-if="orderFieldSelected"
                         class="ml-3" 
                         flat 
                         icon 
-                        color="info"
+                        color="white"
                         @click="handlerOrderSwitch">
                         <v-icon>
                             {{order === 'asc' ? 'arrow_upward' : 'arrow_downward'}}

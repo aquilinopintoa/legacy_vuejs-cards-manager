@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <v-toolbar app class="mt-5" card prominent>
+    <v-toolbar app class="card-toolbar mt-5 blue pt-3"  card prominent>
         <v-layout row justify-center>
             <CardsToolBar
                 @filter-change="handlerFilterChange"
@@ -8,7 +8,7 @@
         </v-layout>
     </v-toolbar>
     
-    <v-layout row wrap class="mt-5">
+    <v-layout row wrap class="mt-5 pt-4">
         <v-flex xs12 md6 lg4 v-for="(card, index) of cards" :key="index">
             <Card
                 :card="card"
@@ -22,7 +22,7 @@
             :card="selectedCard"
             :onSubmit="handlerSubmit"
             :onCancel="handlerCancel"
-            :submitLabel="isUpdateModalActive ? 'Update' : 'Add'"/>
+            :submitLabel="isUpdateModalActive ? 'Update' : 'Create'"/>
     </v-dialog>
     <v-btn
         fixed
@@ -30,7 +30,7 @@
         fab
         bottom
         right
-        color="pink"
+        color="blue"
         @click="openCreateModal"
     >
         <v-icon>add</v-icon>
@@ -195,3 +195,10 @@ export default class Home extends Vue {
     }
 }
 </script>
+
+<style>
+.card-toolbar {
+    z-index: 1;
+}
+</style>
+
