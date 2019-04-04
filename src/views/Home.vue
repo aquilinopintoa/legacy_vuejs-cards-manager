@@ -3,6 +3,7 @@
     <v-toolbar app class="mt-5" card prominent>
         <v-layout row justify-center>
             <CardsToolBar
+                @filter-change="handlerFilterChange"
                 @order-change="handlerOrderChange"/>
         </v-layout>
     </v-toolbar>
@@ -38,20 +39,28 @@
 </template>
 
 <script lang="ts">
-import { clone, orderBy } from 'lodash';
+import { clone, orderBy, startsWith } from 'lodash';
 import { Component, Vue } from 'vue-property-decorator';
 import {
     CardRawInterface,
     CardInterface
 } from '@/store/modules/cards';
 import Card, { CardActionInterface } from '@/components/Card.vue';
-import CardsToolBar, { OrderInterface } from '@/components/CardsToolBar.vue';
+import CardsToolBar, {
+    OrderInterface,
+    FilterInterface,
+    FILTER_TYPES
+} from '@/components/CardsToolBar.vue';
 import CardForm from '@/components/CardForm.vue';
 
 const MODAL_MODE = {
     create: 'CREATE',
     update: 'UPDATE'
 };
+
+interface CardWithIndexInterface extends CardInterface {
+    [key: string]: string;
+}
 
 @Component({
     components: {
@@ -67,13 +76,29 @@ export default class Home extends Vue {
     private openModal: boolean = false;
     private selectedCard: CardInterface | null = null;
     private order: OrderInterface | null = null;
-    private filter: null = null;
+    private filter: FilterInterface | null = null;
 
     get cards (): CardInterface[] {
         let cards = this.$store.getters['cards/get']();
+        const filter = this.filter;
+        if (filter) {
+            cards = cards.filter((card: CardInterface) => {
+                const cardWithIndex = card as CardWithIndexInterface;
+                switch (filter.type) {
+                    case FILTER_TYPES.equals:
+                        return cardWithIndex[filter.filterField] === filter.filter;
+                    case FILTER_TYPES.startWith:
+                        return startsWith(cardWithIndex[filter.filterField], filter.filter);
+                    default:
+                }
+                return false;
+            });
+        }
+
         if (this.order) {
             cards = orderBy(cards, [this.order.orderField], [this.order.order]);
         }
+
         return cards;
     }
 
@@ -163,7 +188,10 @@ export default class Home extends Vue {
     //  METHODS TO CARD MANAGER TOOL BAR EVENTS
     private handlerOrderChange (newValue: OrderInterface) {
         this.order = newValue;
-        console.log(this.order);
+    }
+
+    private handlerFilterChange (newValue: FilterInterface) {
+        this.filter = newValue;
     }
 }
 </script>
