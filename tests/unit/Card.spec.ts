@@ -14,8 +14,6 @@ describe('Card.vue', () => {
         url: 'https://test.test.co'
     });
 
-
-
     beforeEach(() => {
         wrapper = mount(Card, {
             propsData: { card,  actions: []},
@@ -23,7 +21,6 @@ describe('Card.vue', () => {
     });
 
     it('renders props.msg when passed', () => {
-        console.log(wrapper.text());
         expect(wrapper.text()).toMatch(card.description);
     });
 });
