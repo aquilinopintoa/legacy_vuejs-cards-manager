@@ -4,7 +4,10 @@
             <v-layout
                 text-xs-center>
                 <v-card>
-                    <v-card-title primary-title>
+                    <v-card-title class="pa-4 white--text blue display-1">
+                        {{submitLabel}} Card
+                    </v-card-title>
+                    <v-card-title class="px-5" primary-title>
                         <v-flex xs12>
                             <v-text-field
                                 label="Title"
@@ -28,17 +31,19 @@
                     </v-card-title>
 
                     <v-card-actions>
-                        <v-btn
-                            @click="onCancel" 
-                            color="red">
-                            Cancel
-                        </v-btn>
-                        <v-btn
-                            :disabled="!valid"
-                            @click="handlerSubmit" 
-                            color="success">
-                            {{submitLabel}}
-                        </v-btn>
+                        <v-layout class="py-4 px-3" justify-end>
+                            <v-btn
+                                @click="onCancel" 
+                                color="error">
+                                Cancel
+                            </v-btn>
+                            <v-btn
+                                :disabled="!valid"
+                                @click="handlerSubmit" 
+                                color="info">
+                                {{submitLabel}}
+                            </v-btn>
+                        </v-layout>
                     </v-card-actions>
                 </v-card>
             </v-layout>

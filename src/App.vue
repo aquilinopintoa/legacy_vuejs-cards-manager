@@ -1,16 +1,23 @@
 <template>
   <v-app>
-    <v-toolbar app>
-      <v-toolbar-title class="headline text-uppercase">
+    <v-toolbar flat app class="blue white--text">
+      <v-toolbar-title class="headline text-uppercase ">
         <span>Card Manager</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn
-        flat
+        fab
+        color="success"
+        dark
+        small
         href="https://github.com/aquilinopintoa"
         target="_blank"
       >
-        <span class="mr-2">Go to author</span>
+        <v-icon
+          medium
+          dark>
+          mdi-github-circle
+        </v-icon>
       </v-btn>
     </v-toolbar>
     <v-content>
