@@ -18,7 +18,9 @@ Extras:
 * Almacenar las tarjetas en localstorage para que no se pierdan si cerramos o recargamos la aplicación.
 * Añadir botones que nos permitan ordenar las tarjetas por título asc/desc o bien por creación asc/desc
 * Que se visualice correctamente en mobile y desktop.
+
 Nota:
+
 Además del correcto funcionamiento, se valorará la calidad y legibilidad del código, la estructura de ficheros, así como las pruebas unitarias realizadas.
 
 ## Getting Started
