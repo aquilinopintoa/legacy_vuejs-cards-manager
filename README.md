@@ -11,7 +11,6 @@ Queremos crear una sencilla aplicación en js/react que nos permita añadir, edi
         * Título (obligatorio)
         * Descripción (obligatorio)
         * Imagen (opcional y solamente la url, no es necesario que permita subir imágenes)
-
     * Cada tarjeta a mostrar ha de visualizar la imagen en la parte superior, en caso de no haber indicado ninguna, ha de mostrar una imagen predeterminada por nosotros, justo debajo el título y descripción y al pasar el ratón sobre la tarjeta ha de mostrar unos botones que permitan editar o borrar la etiqueta.
     * Tal como vayamos añadiendo tarjetas se han de ir visualizando directamente en la aplicación.
 
