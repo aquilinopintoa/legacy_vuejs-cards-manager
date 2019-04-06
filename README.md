@@ -5,6 +5,8 @@ Test application to verify competences in the development using Vue and Vuetify 
 
 The definition of this project was taken from a challenge requested during the selection process in a company.
 
+It's deployed in [Card manager](https://vuejs-card-manager.firebaseapp.com/)
+
 ## Definition
 Queremos crear una sencilla aplicación en js/react que nos permita añadir, editar o eliminar “tarjetas” con una información muy básica (título, descripción e imagen). Dicha aplicación ha de cumplir los siguientes requisitos:
 * Botón que muestra un modal con un sencillo formulario para introducir los datos de la nueva tarjeta:
