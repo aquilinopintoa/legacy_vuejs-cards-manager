@@ -11,7 +11,7 @@
   "dependencies": {
     "@mdi/font": "^3.5.95",
     "@types/lodash": "^4.14.123",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.13",
     "material-icons": "^0.3.1",
     "moment": "^2.24.0",
     "vue": "^2.6.6",
