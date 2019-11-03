@@ -45,13 +45,13 @@ import {
     CardRawInterface,
     CardInterface
 } from '@/store/modules/cards';
-import Card, { CardActionInterface } from '@/components/Card.vue';
+import Card, { CardActionInterface } from '@/components/Card/Card.vue';
 import CardsToolBar, {
     OrderInterface,
     FilterInterface,
     FILTER_TYPES
-} from '@/components/CardsToolBar.vue';
-import CardForm from '@/components/CardForm.vue';
+} from '@/components/CardsToolBar/CardsToolBar.vue';
+import CardForm from '@/components/CardForm/CardForm.vue';
 
 const MODAL_MODE = {
     create: 'CREATE',

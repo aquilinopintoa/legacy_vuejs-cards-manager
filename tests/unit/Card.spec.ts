@@ -1,4 +1,4 @@
-import { mount } from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
 import Vue from 'vue';
 import Vuetify from 'vuetify';
 import Card from '@/components/Card.vue';
@@ -15,7 +15,7 @@ describe('Card.vue', () => {
     });
 
     beforeEach(() => {
-        wrapper = mount(Card, {
+        wrapper = shallowMount(Card, {
             propsData: { card,  actions: []},
         });
     });
