@@ -20,6 +20,10 @@ describe('Card.vue', () => {
         });
     });
 
+    it('returns an error for a valid code', () => {
+        expect(wrapper).toMatchSnapshot();
+    });
+
     it('renders props.msg when passed', () => {
         expect(wrapper.text()).toMatch(card.description);
     });

@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Card.vue returns an error for a valid code 1`] = `
+<v-container-stub tag="div">
+  <v-layout-stub tag="div" text-xs-center="">
+    <v-card-stub tag="div" width="100%">
+      <v-img-stub aspectratio="2.75" src="https://test.test.co" position="center center" transition="fade-transition" class="align-end">
+        <v-container-stub tag="div" fluid="" pa-2="" align-end="" justify-start="">
+          <div class="headline white--text text-xs-left">test</div>
+        </v-container-stub>
+      </v-img-stub>
+      <v-card-title-stub primarytitle="true">
+        <div>
+          <div> test-description </div>
+        </div>
+      </v-card-title-stub>
+      <v-card-actions-stub class="justify-end">
+        <div style="display: none;"></div>
+      </v-card-actions-stub>
+    </v-card-stub>
+  </v-layout-stub>
+</v-container-stub>
+`;
