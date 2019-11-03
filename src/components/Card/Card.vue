@@ -43,7 +43,7 @@
 </template>
 
 <script lang="ts">
-import { CardInterface } from '@/store/modules/cards';
+import { CardInterface } from '@/store/modules/cards/cards';
 import { Component, Vue, Prop } from 'vue-property-decorator';
 
 export interface CardActionInterface {

@@ -44,7 +44,7 @@ import { Component, Vue } from 'vue-property-decorator';
 import {
     CardRawInterface,
     CardInterface
-} from '@/store/modules/cards';
+} from '@/store/modules/cards/cards';
 import Card, { CardActionInterface } from '@/components/Card/Card.vue';
 import CardsToolBar, {
     OrderInterface,

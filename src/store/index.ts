@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import cards from './modules/cards';
+import cards from './modules/cards/cards';
 
 Vue.use(Vuex);
 

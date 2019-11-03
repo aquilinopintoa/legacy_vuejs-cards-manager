@@ -1,8 +1,8 @@
 import { shallowMount } from '@vue/test-utils';
 import Vue from 'vue';
 import Vuetify from 'vuetify';
-import Card from '@/components/Card.vue';
-import { CardRawInterface, FactoryCard } from '@/store/modules/cards';
+import Card from '@/components/Card/Card.vue';
+import { CardRawInterface, FactoryCard } from '@/store/modules/cards/cards';
 
 Vue.use(Vuetify);
 

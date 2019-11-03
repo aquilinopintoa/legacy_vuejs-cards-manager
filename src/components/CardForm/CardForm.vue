@@ -53,7 +53,7 @@
 
 <script lang="ts">
 import { clone } from 'lodash';
-import { CardRawInterface, CardInterface } from '@/store/modules/cards';
+import { CardRawInterface, CardInterface } from '@/store/modules/cards/cards';
 import { Component, Vue, Prop, Watch } from 'vue-property-decorator';
 
 @Component({})
