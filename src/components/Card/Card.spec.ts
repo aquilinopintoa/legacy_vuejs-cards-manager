@@ -2,13 +2,14 @@ import { shallowMount } from '@vue/test-utils';
 import Vue from 'vue';
 import Vuetify from 'vuetify';
 import Card from '@/components/Card/Card.vue';
-import { CardRawInterface, FactoryCard } from '@/store/modules/cards/cards';
+import { CardInterface } from '@/store/modules/cards/interfaces';
+import { FactoryCard } from '@/store/modules/cards/factories';
 
 Vue.use(Vuetify);
 
 describe('Card.vue', () => {
     let wrapper: any = null;
-    const card = FactoryCard({
+    const card: CardInterface = FactoryCard({
         title: 'test',
         description: 'test-description',
         url: 'https://test.test.co'

@@ -1,85 +1,15 @@
-import moment from 'moment';
-import Vue from 'vue';
-
-const DEFAULT_URL = 'https://cdn.vuetifyjs.com/images/cards/desert.jpg';
-
-export interface CardRawInterface {
-    title: string;
-    description: string;
-    url: string;
-
-}
-
-export interface CardInterface {
-    id: string;
-    title: string;
-    description: string;
-    url: string;
-    created_at: string;
-
-}
-
-export const FactoryCard = (raw: CardRawInterface): CardInterface => {
-    const createdAt = moment().format();
-    return {
-        id: `${raw.title}${createdAt}`,
-        created_at: createdAt,
-        ...raw,
-        url: raw.url || DEFAULT_URL
-    };
-};
+import getters from './state/getters';
+import mutations from './state/mutations';
+import actions from './state/actions';
 
 export default {
     namespaced: true,
+
     state: {
         cards: {}
     },
 
-    getters: {
-        get: (state: any) =>
-            (id: string): CardInterface | CardInterface[] => {
-                if (id) {
-                    return state.cards[id];
-                } else {
-                    return Object.values(state.cards);
-                }
-            }
-    },
-
-    mutations: {
-        initialiseStore (store: any) {
-            const storeLS = localStorage.getItem('cm.cards');
-            if (storeLS) {
-                const newStore = JSON.parse(storeLS);
-                Object.assign(store, newStore);
-            }
-        },
-        set (store: any, card: CardInterface) {
-            Vue.set(store.cards, card.id, card);
-            localStorage.setItem('cm.cards', JSON.stringify(store));
-        },
-        reset (store: any) {
-            store.cards = {};
-            localStorage.setItem('cm.cards', JSON.stringify(store));
-        }
-    },
-
-    actions: {
-        async create (context: any, cardRaw: CardRawInterface) {
-            const card = FactoryCard(cardRaw);
-
-            await context.commit('set', card);
-        },
-        async update (context: any, card: CardInterface) {
-            await context.commit('set', card);
-        },
-        async remove (context: any, id: string) {
-            const previous = context.getters.get();
-            const removedTarget = previous.filter((card: CardInterface) => card.id !== id);
-
-            await context.commit('reset');
-
-            await Promise.all(removedTarget.map((card: CardInterface) => context.commit('set', card)));
-        }
-    }
+    getters,
+    mutations,
+    actions
 };
