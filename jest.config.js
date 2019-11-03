@@ -17,7 +17,7 @@ module.exports = {
   ],
   collectCoverage: true,
   coverageReporters: [
-    'json',
+    'text',
     'html'
   ],
   collectCoverageFrom: [
@@ -26,6 +26,14 @@ module.exports = {
   ],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1'
+  },
+  coverageThreshold: {
+    "global": {
+      "branches": 80,
+      "functions": 80,
+      "lines": 80,
+      "statements": 80
+    }
   },
   snapshotSerializers: [
     'jest-serializer-vue'
