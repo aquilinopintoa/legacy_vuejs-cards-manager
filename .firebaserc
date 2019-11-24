@@ -1,5 +1,14 @@
 {
   "projects": {
-    "default": "vuejs-card-manager"
+    "default": "apinto-frontend-samples"
+  },
+  "targets": {
+    "apinto-frontend-samples": {
+      "hosting": {
+        "vue-card-manager": [
+          "apinto-vue-card-manager"
+        ]
+      }
+    }
   }
 }
